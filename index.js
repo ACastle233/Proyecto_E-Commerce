@@ -1,4 +1,6 @@
 
+
+
 let textML = document.getElementById('textCategorie');
 
 /*
@@ -35,7 +37,8 @@ function renderData(mercadoLibreObject) {
           let keywordMl = document.createElement('h2');
           keywordMl.textContent = `${data[index].keyword}`;
     
-          let createMLUrl = document.createElement('h3');
+          let createMLUrl = document.createElement('a');
+          createMLUrl.setAttribute('href', data[index].url);
           createMLUrl.textContent = `${data[index].url}`;
     
           textML.appendChild(keywordMl)
@@ -50,6 +53,6 @@ function renderData(mercadoLibreObject) {
     })
   }
   
-  const newMercadoLibre = new MercadoLibreService('https://api.mercadolibre.com/trends/MLA/MLA1743');
+  const newMercadoLibre = new MercadoLibreService('https://api.mercadolibre.com/trends/MLM/MLM1743');
   
   renderData(newMercadoLibre);
