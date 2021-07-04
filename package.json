@@ -1,0 +1,24 @@
+{
+  "name": "proyectomercado",
+  "version": "1.0.0",
+  "description": "class npm",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ACastle233/Proyecto_E-Commerce.git"
+  },
+  "author": "https://github.com/ACastle233",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ACastle233/Proyecto_E-Commerce/issues"
+  },
+  "homepage": "https://github.com/ACastle233/Proyecto_E-Commerce#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "nodemon": "^2.0.9"
+  }
+}
