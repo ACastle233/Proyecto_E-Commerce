@@ -23,6 +23,7 @@ async function renderData(link) {
 
 
   for (let i = 1; i <= 3; i++) {
+    
     let cont = document.getElementById("carCont" + i);
     let contDes = document.getElementById("carContDes" + i);
 
