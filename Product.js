@@ -1,8 +1,9 @@
 class Product{
-    constructor(idProducto, nameProduct, prizeProduct){
+    constructor(idProducto, nameProduct, prizeProduct,cantProduct){
         this._idProducto = idProducto;
         this._nameProduct = nameProduct;
         this._prizeProduct = prizeProduct;
+        this._cantProduct = cantProduct;
     }
 
     get idProducto(){
@@ -29,4 +30,7 @@ class Product{
         this._prizeProduct = prizeProduct;
     }
 
+    get cantProduct(cantProduct){
+        this._cantProduct=cantProduct;
+    }
 }
