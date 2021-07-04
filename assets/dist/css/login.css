@@ -1,7 +1,7 @@
 body {
     margin: 0;
-    color: #6a6f8c;
-    background: #c8c8c8;
+    color: #8085a0;
+    background: #fff15b;
     font: 600 16px/18px "Open Sans", sans-serif;
   }
   *,
@@ -39,7 +39,7 @@ body {
     height: 100%;
     position: absolute;
     padding: 90px 70px 50px 70px;
-    background: rgba(40, 57, 101, 0.9);
+    background: rgba(70, 70, 70, 0.9);
   }
   .login-html .sign-in-htm,
   .login-html .sign-up-htm {
