@@ -1,9 +1,9 @@
 let categoriasArray= [];
 
- const findCategorie= (categoria) => {
+ const findCategorie= (nombre) => {
      if(categoriasArray.length>0){
          const categoriaExiste = categoriasArray.some((categoriaexistente) =>{
-             return categoriaexistente.categoria===categoria
+             return categoriaexistente.categoria===nombre
          }); return categoriaExiste;
      }return false
  }
@@ -12,10 +12,8 @@ let categoriasArray= [];
      categoriasArray.push(categoria);
      return categoriasArray;
  }
- const fn = () =>{
-    console.log('Hola');
-    return categoriasArray;
-}
 
- module.exports = {findCategorie,agregarCategoria,fn}
+
+
+ module.exports = {findCategorie,agregarCategoria}
 

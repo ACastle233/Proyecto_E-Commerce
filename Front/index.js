@@ -1,7 +1,6 @@
 
 let textML = document.getElementById('textCategorie');
-const {findCategorie, agregarCategoria,fn}=require('./Services/categoria.service')
-fn()
+
 class MercadoLibreService {
   constructor(url) {
     this.url = url;
