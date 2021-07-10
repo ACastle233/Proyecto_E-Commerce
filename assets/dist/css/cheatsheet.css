@@ -33,7 +33,7 @@ body {
 .bd-aside a:hover,
 .bd-aside a:focus {
   color: rgba(0, 0, 0, .85);
-  background-color: rgba(121, 82, 179, .1);
+  background-color: rgba(219, 12, 202, 0.1);
 }
 
 .bd-aside .active {
@@ -51,7 +51,7 @@ body {
 .bd-aside .btn:hover,
 .bd-aside .btn:focus {
   color: rgba(0, 0, 0, .85);
-  background-color: rgba(121, 82, 179, .1);
+  background-color: rgba(198, 211, 14, 0.74);
 }
 
 .bd-aside .btn:focus {
