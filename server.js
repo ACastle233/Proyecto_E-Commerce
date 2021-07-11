@@ -3,8 +3,8 @@ const express =require('express');
 const app = express();
 const cors = require ('cors');
 require('dotenv').config();
-const {findCategorie, agregarCategoria}=require('./Services/categoria.service')
-const {validacionCat,validacionExistencia}=require('./Middlewares/index')
+const {obtenerCategoriaNombre,eliminarCategoria, eliminarCategoriaNombre,obtenerCategorias, agregarCategoria}=require('./Services/categoria.service')
+const {existeCategoria,validaNombreCat,validacionCat,validacionExistencia}=require('./Middlewares/index')
 //MIDLEWARES
 app.use(express.json());
 app.use(cors());
@@ -24,16 +24,28 @@ app.get('/',cors(corsOption),(req,res) =>{
     res.status(200).json({message:'Hola'})
 })
 
-app.get('/categorias',cors(corsOption),(req,res) =>{
-    res.status(200).json({message:'Hola Categorias'})
+//Obten todas las categorias
+app.get('/categorias',(req,res) =>{
+    const data = obtenerCategorias();
+    return res.status(200).json(data);
 })
+
+//Obten categoria por nombre
+app.get('/categoria', validaNombreCat,existeCategoria,(req,res) =>{
+    const data = obtenerCategoriaNombre(req.body);
+    return res.status(200).json(data);
+})
+
 app.post('/categorias',validacionCat,validacionExistencia,(req,res) =>{
-    const data= agregarCategoria(req.body)
-    console.log(data)
-    return res.status(200).json({message:'Categoría subida con exito'})
+    const data= agregarCategoria(req.body);
+    console.log('Categoria subida con exito')
+    return res.status(200).json(data)
     
-})
-app.delete('/categorias',cors(corsOption),(req,res) =>{
-    res.status(200).json({message:'metodo delete'})
+});
+
+//API elimina categoria por nombre
+app.delete('/categorias', validaNombreCat,(req,res) =>{
+    const data = eliminarCategoriaNombre(req.body);
+    return res.status(200).json('Eliminado con exito')
 })
 
