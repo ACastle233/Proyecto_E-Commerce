@@ -1,12 +1,57 @@
 const http = require('http');
+const express =require('express');
+const app = express();
+const cors = require ('cors');
 require('dotenv').config();
+const {obtenerCategoriaNombre, eliminarCategoriaNombre,obtenerCategorias, agregarCategoria, modificarCategoria} =require('./Services/categoria.service')
+const {existeCategoria,validaNombreCat,validacionCat,validacionExistencia}=require('./Middlewares/index')
+//MIDLEWARES
+app.use(express.json());
+app.use(cors());
+app.use(express.urlencoded({extended:true}));
+app.use((err,req,res,next)=>{
+    if(err){if(!res.headersSend){return res.status(500).json('Error interno del servidor')} } 
+    next();
+}  )
+const {corsOption}=require('./Middlewares/index')
 
-function request(req, res) {
-    res.write(`Bienvenido al BackEnd`);
-    res.end();
-}
-const server = http.createServer(request);
 
-server.listen(process.env.PORT, process.env.HOST, () => {
+app.listen(process.env.PORT, process.env.HOST, () => {
     console.log(`Servidor iniciado en http://${process.env.HOST}:${process.env.PORT}`);
 });
+
+app.get('/',cors(corsOption),(req,res) =>{
+    res.status(200).json({message:'Hola'})
+})
+
+//Obten todas las categorias
+app.get('/categorias',(req,res) =>{
+    const data = obtenerCategorias();
+    return res.status(200).json(data);
+})
+
+//Obten categoria por nombre
+app.get('/categoria', validaNombreCat,existeCategoria,(req,res) =>{
+    const data = obtenerCategoriaNombre(req.body);
+    return res.status(200).json(data);
+})
+
+//API crear una nueva categoria
+app.post('/categorias',validacionCat,validacionExistencia,(req,res) =>{
+    const data= agregarCategoria(req.body);
+    console.log('Categoria subida con exito')
+    return res.status(200).json(data)
+    
+});
+
+app.put('/categorias', validacionCat, (req,res) =>{
+    const data = modificarCategoria(req.body);
+    return status(200).json(data);
+})
+
+//API elimina categoria por nombre
+app.delete('/categorias', validaNombreCat,(req,res) =>{
+    const data = eliminarCategoriaNombre(req.body);
+    return res.status(200).json('Eliminado con exito')
+})
+
