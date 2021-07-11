@@ -3,7 +3,7 @@ const express =require('express');
 const app = express();
 const cors = require ('cors');
 require('dotenv').config();
-const {obtenerCategoriaNombre,eliminarCategoria, eliminarCategoriaNombre,obtenerCategorias, agregarCategoria}=require('./Services/categoria.service')
+const {obtenerCategoriaNombre, eliminarCategoriaNombre,obtenerCategorias, agregarCategoria, modificarCategoria} =require('./Services/categoria.service')
 const {existeCategoria,validaNombreCat,validacionCat,validacionExistencia}=require('./Middlewares/index')
 //MIDLEWARES
 app.use(express.json());
@@ -36,12 +36,18 @@ app.get('/categoria', validaNombreCat,existeCategoria,(req,res) =>{
     return res.status(200).json(data);
 })
 
+//API crear una nueva categoria
 app.post('/categorias',validacionCat,validacionExistencia,(req,res) =>{
     const data= agregarCategoria(req.body);
     console.log('Categoria subida con exito')
     return res.status(200).json(data)
     
 });
+
+app.put('/categorias', validacionCat, (req,res) =>{
+    const data = modificarCategoria(req.body);
+    return status(200).json(data);
+})
 
 //API elimina categoria por nombre
 app.delete('/categorias', validaNombreCat,(req,res) =>{

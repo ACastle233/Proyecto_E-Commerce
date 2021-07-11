@@ -1,9 +1,28 @@
 let categoriasArray= [];
 
- const findCategorie= (nombre) => {
+const fetch = require("node-fetch"); 
+
+async function renderData(link) {
+    let response = await fetch(link);
+    let data = await response.json()
+    
+
+    for(let i in data)
+        categoriasArray.push(data[i]);
+    console.log(categoriasArray)
+    return data; 
+}
+let json_data = renderData('https://api.mercadolibre.com/sites/MLM/categories')
+
+
+
+
+
+
+const findCategorie= (id) => {
      if(categoriasArray.length>0){
          const categoriaExiste = categoriasArray.some((categoria) =>{
-             return categoria.nombre===nombre
+             return categoria.id===id
          }); 
          return categoriaExiste;
      }return false
@@ -22,7 +41,7 @@ let categoriasArray= [];
     let item = {};
     console.log(categoria);
     categoriasArray.forEach((elemento) =>{
-        if(elemento.nombre === categoria.nombre){
+        if(elemento.id === categoria.id){
             item = elemento;
         }
     });
@@ -40,7 +59,7 @@ let categoriasArray= [];
     console.log('Eliminar ',categoria);
     if(categoriasArray.length>0){
         categoriasArray.forEach((elemento) =>{
-            if(elemento.nombre === categoria.nombre){
+            if(elemento.id === categoria.id){
                 let index = categoriasArray.indexOf(elemento);
                 console.log(index);
                 categoriasArray.splice(index,1);
@@ -53,7 +72,15 @@ let categoriasArray= [];
     
 }
 
+const modificarCategoria = (categoria) => {
+    if(findCategorie){
+        categoriasArray.splice(categoria)
+    }
+    categoriasArray.push(categoria)
+    return categoriasArray;
+}
 
 
- module.exports = {obtenerCategoriaNombre,eliminarCategoriaNombre,findCategorie,agregarCategoria,obtenerCategorias, eliminarCategoria}
+
+ module.exports = {modificarCategoria,obtenerCategoriaNombre,eliminarCategoriaNombre,findCategorie,agregarCategoria,obtenerCategorias, eliminarCategoria}
 
