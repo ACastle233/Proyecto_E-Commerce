@@ -9,7 +9,6 @@ async function renderData(link) {
 
     for(let i in data)
         categoriasArray.push(data[i]);
-    console.log(categoriasArray)
     return data; 
 }
 let json_data = renderData('https://api.mercadolibre.com/sites/MLM/categories')
@@ -34,8 +33,9 @@ const findCategorie= (id) => {
  }
 
  const obtenerCategorias = () =>{
-     return categoriasArray;
- }
+    return categoriasArray;
+
+}
 
  const obtenerCategoriaNombre =(categoria) => {
     let item = {};
@@ -46,7 +46,9 @@ const findCategorie= (id) => {
         }
     });
     return item
- }
+
+    }
+ 
 
  const eliminarCategoria = (item) =>{
      let i = categoriasArray.indexOf(item);
