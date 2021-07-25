@@ -35,7 +35,7 @@ const validacionExistencia = (req,res,next)=>{
 }
 
 const existeCategoria = (req,res,next)=>{
-    const{id}= req.body;
+    const { id } = req.body;
     const result= findCategorie(id)
 
     console.log('resultado de la busqueda-> ',result)
