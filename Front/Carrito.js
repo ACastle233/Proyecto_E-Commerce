@@ -36,9 +36,9 @@ class Carrito{
     }
 }
 
-var formatter = new Intl.NumberFormat('en-US', {
+var formatter = new Intl.NumberFormat('es-MX', {
     style: 'currency',
-    currency: 'USD',
+    currency: 'MXN',
   
     // These options are needed to round to whole numbers if that's what you want.
     //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
@@ -51,10 +51,10 @@ const pintarCarrito = () => {
     items.innerHTML = "";
     Object.values(carrito).forEach(producto => {
         
-        templateCarrito.querySelectorAll('p')[0].textContent = producto.id
-        templateCarrito.querySelector('h3').textContent = producto.title
-        templateCarrito.querySelectorAll('p')[1].textContent = `${producto.quantity} x ${formatter.format(producto.price)}`
-        templateCarrito.querySelectorAll('p')[3].textContent = formatter.format(producto.price * producto.quantity);
+        templateCarrito.querySelectorAll('p')[0].textContent = producto._idProduct
+        templateCarrito.querySelector('h3').textContent = producto._nameProducto
+        templateCarrito.querySelectorAll('p')[1].textContent = `${producto._cantProduct} x ${formatter.format(producto._priceProduct)}`
+        templateCarrito.querySelectorAll('p')[3].textContent = formatter.format(producto._priceProduct * producto._cantProduct);
   
         const clone = templateCarrito.cloneNode(true)
         fragment.appendChild(clone)
@@ -74,8 +74,8 @@ const pintarFooter = () => {
     }
     
     // sumar cantidad y sumar totales
-    const nCantidad = Object.values(carrito).reduce((acc, { quantity }) => acc + quantity, 0)
-    const nPrecio = Object.values(carrito).reduce((acc, {quantity, price}) => acc + quantity * price ,0)
+    const nCantidad = Object.values(carrito).reduce((acc, { _cantProduct }) => acc + _cantProduct, 0)
+    const nPrecio = Object.values(carrito).reduce((acc, {_cantProduct, _priceProduct}) => acc + _cantProduct * _priceProduct ,0)
     // console.log(nPrecio)
   
     //templateFooter.querySelectorAll('td')[0].textContent = nCantidad

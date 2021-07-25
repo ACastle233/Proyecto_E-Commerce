@@ -1,8 +1,8 @@
-class Product{
-    constructor(idProducto, nameProduct, prizeProduct,cantProduct){
-        this._idProducto = idProducto;
+export default class Product{
+    constructor(idProduct, nameProduct, priceProduct,cantProduct){
+        this._idProduct = idProduct;
         this._nameProduct = nameProduct;
-        this._prizeProduct = prizeProduct;
+        this._priceProduct = priceProduct;
         this._cantProduct = cantProduct;
     }
 
@@ -22,15 +22,15 @@ class Product{
         this._nameProduct = updateName;
     }
 
-    get prizeProduct(){
-        return this._prizeProduct;
+    get priceProduct(){
+        return this._priceProduct;
     }
 
-    set prizeProduct(prizeProduct){
-        this._prizeProduct = prizeProduct;
+    set priceProduct(priceProduct){
+        this._priceProduct = priceProduct;
     }
 
-    get cantProduct(cantProduct){
+    get cantProduct(){
         this._cantProduct=cantProduct;
     }
 }
