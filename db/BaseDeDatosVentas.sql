@@ -1,6 +1,6 @@
-CREATE DATABASE ventasML;
+CREATE DATABASE APIML;
 
-USE ventasML;
+USE ventas;
 
 CREATE TABLE productos(
     idProducto INT NOT NULL IDENTITY(1,1),
