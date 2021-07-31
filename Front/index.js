@@ -9,6 +9,15 @@ const footer = document.getElementById("footer");
 let textML = document.getElementById("textCategorie");
 let carrito = {};
 
+var formatter = new Intl.NumberFormat("es-MX", {
+  style: "currency",
+  currency: "MXN",
+
+  // These options are needed to round to whole numbers if that's what you want.
+  //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+  //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+});
+
 // Eventos
 // El evento DOMContentLoaded es disparado cuando el documento HTML ha sido completamente cargado y parseado
 cards.addEventListener("click", (e) => {
@@ -161,14 +170,17 @@ const pintarCarrito = () => {
 
   Object.values(carrito).forEach((producto) => {
     templateCarrito.querySelector("th").textContent = producto._idProduct;
-    templateCarrito.querySelectorAll("td")[0].textContent = producto._nameProduct;
-    templateCarrito.querySelectorAll("td")[1].textContent = producto._cantProduct;
+    templateCarrito.querySelectorAll("td")[0].textContent =
+      producto._nameProduct;
+    templateCarrito.querySelectorAll("td")[1].textContent =
+      producto._cantProduct;
     templateCarrito.querySelector("span").textContent =
       producto._priceProduct * producto._cantProduct;
 
     //botones
     templateCarrito.querySelector(".btn-info").dataset.id = producto._idProduct;
-    templateCarrito.querySelector(".btn-danger").dataset.id = producto._idProduct;
+    templateCarrito.querySelector(".btn-danger").dataset.id =
+      producto._idProduct;
 
     const clone = templateCarrito.cloneNode(true);
     fragment.appendChild(clone);
@@ -196,7 +208,8 @@ const pintarFooter = () => {
     0
   );
   const nPrecio = Object.values(carrito).reduce(
-    (acc, { _cantProduct, _priceProduct }) => acc + _cantProduct * _priceProduct,
+    (acc, { _cantProduct, _priceProduct }) =>
+      acc + _cantProduct * _priceProduct,
     0
   );
   // console.log(nPrecio)
