@@ -55,26 +55,26 @@ async function renderData(link) {
         "/description"
     );
     about = await about.json();
-    let Objeto = new miContenido(
+    let Contenido = new miContenido(
       document.createElement("h1"),
       document.createElement("p"),
       document.createElement("p"),
       document.createElement("a")
     );
 
-    Objeto.header.textContent = `${data.results[idx1].title}`;
-    Objeto.price.textContent = `${data.results[idx1].price}`;
+    Contenido.header.textContent = `${data.results[idx1].title}`;
+    Contenido.price.textContent = `${data.results[idx1].price}`;
 
-    Objeto.content.textContent = `${about.plain_text}`;
+    Contenido.content.textContent = `${about.plain_text}`;
 
-    Objeto.btn.textContent = "Más info...";
+    Contenido.btn.textContent = "Más info...";
 
-    Objeto.btn.setAttribute("href", data.results[idx1].permalink);
-    Objeto.btn.className += "btn btn-lg btn-warning"; //warning hace el boton amarillo
+    Contenido.btn.setAttribute("href", data.results[idx1].permalink);
+    Contenido.btn.className += "btn btn-lg btn-warning"; //warning hace el boton amarillo
 
-    cont.appendChild(Objeto.header);
-    contDes.appendChild(Objeto.content);
-    cont.appendChild(Objeto.btn);
+    cont.appendChild(Contenido.header);
+    contDes.appendChild(Contenido.content);
+    cont.appendChild(Contenido.btn);
   }
 
   for (let j = 0; j < 9; j++) {
@@ -90,7 +90,7 @@ async function renderData(link) {
     //let idx2=Math.floor(Math.random() * Object.keys(data.results).length);
     let imagen = document.createElement("img");
     imagen.setAttribute("src", data.results[j].thumbnail);
-    let Objeto = new miContenido(
+    let Contenido = new miContenido(
       document.createElement("h4"),
       document.createElement("p"),
       document.createElement("p"),
@@ -103,19 +103,19 @@ async function renderData(link) {
     );
     about = await about.json();
 
-    Objeto.header.textContent = `${data.results[j].title}`;
-    Objeto.content.textContent = `${about.plain_text}`;
-    Objeto.price.textContent = `${data.results[j].price}`;
+    Contenido.header.textContent = `${data.results[j].title}`;
+    Contenido.content.textContent = `${about.plain_text}`;
+    Contenido.price.textContent = `${data.results[j].price}`;
 
-    Objeto.btn.textContent = "Agregar al carrito";
-    Objeto.btn.setAttribute("data-id", data.results[j].id);
-    // Objeto.btn.setAttribute("href", data.results[j].permalink);
-    Objeto.btn.className += "btn btn-lg btn-warning";
+    Contenido.btn.textContent = "Agregar al carrito";
+    Contenido.btn.setAttribute("data-id", data.results[j].id);
+    // Contenido.btn.setAttribute("href", data.results[j].permalink);
+    Contenido.btn.className += "btn btn-lg btn-warning";
 
-    cardbody.appendChild(Objeto.header);
-    cardbody.appendChild(Objeto.content);
-    cardbody.appendChild(Objeto.price);
-    cardbody.appendChild(Objeto.btn);
+    cardbody.appendChild(Contenido.header);
+    cardbody.appendChild(Contenido.content);
+    cardbody.appendChild(Contenido.price);
+    cardbody.appendChild(Contenido.btn);
 
     card.appendChild(imagen);
     card.appendChild(cardbody);
