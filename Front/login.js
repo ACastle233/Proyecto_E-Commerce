@@ -13,17 +13,18 @@ function signIn() {
     //console.log(datForm);
 
     const userAction = async () => {
+      
       const res = await fetch(`http://localhost:3000/api/productos/${myProduct.id} `, {
-      method: "PUT", // include, *same-origin, omit
+      method: "POST", // include, *same-origin, omit
       headers: {
         "Content-Type": "application/json;charset=UTF-8"
         
          //'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify(myProduct)
-    });
-    }
-    console.log(myJson);
+        body: JSON.stringify(myProduct)
+      });
+      const myJson = await myresponse.json(); //extract JSON from the http response
+      console.log(myJson);
     };
     userAction();
 

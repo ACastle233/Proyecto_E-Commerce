@@ -4,8 +4,9 @@ const { Usuario } = require("../../db");
 const { check, validationResult } = require("express-validator");
 //const midd = require('../Middlewares/midd.usuario')
 const usuariosService = require("../../Services/usuarios.service");
+const midd = require('../../Middlewares/midd.usuario')
 
-router.post("/register", async (req, res) => {
+router.post("/register", midd.checkDatosAlta, async (req, res) => {
   try {
     req.body.password = bcrypt.hashSync(req.body.password, 10); // aqui nos pasa la contraseña ya encriptada
     const user = await Usuario.create(req.body);
@@ -20,7 +21,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
-router.post("/login", async (req, res) => {
+router.post("/login", midd.checkDatosLogin,  async (req, res) => {
   try {
     const user = await Usuario.findOne({ where: { email: req.body.email } });
     console.log(req.body.email)

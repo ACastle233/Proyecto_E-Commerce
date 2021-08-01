@@ -1,6 +1,7 @@
 
 const router = require('express').Router();
 const { Producto }= require('../../db');
+const midd = require('../../Middlewares/midd.producto')
 
 router.get('/', async (req,res)=>{
     try {
@@ -9,14 +10,14 @@ router.get('/', async (req,res)=>{
     } catch (error) {
         res.status(400).render('404', {msj: error.message , titulo: 'Error en la consulta'})
     }});
-router.post('/', async (req,res)=>{
+router.post('/', midd.checkDatosProducto, async (req,res)=>{
     try {
         const producto= await Producto.create(req.body);
         res.json(producto); 
     } catch (error) {
         res.status(400).render('404', {msj: error.message , titulo: 'Error al agregar el producto'})
     }});
-router.put('/:productoId', async (req,res)=>{
+router.put('/:productoId', midd.checkDatosEditarProducto, async (req,res)=>{
     try {
         await Producto.update(req.body,{
             where:{id: req.params.productoId }

@@ -2,7 +2,9 @@
 const usuariosService = require('../Services/usuarios.service')
 const cors = require('cors')
 const rateLimit = require("express-rate-limit");
-
+const Joi = require('joi');
+const { loginDTO } = require('../dto/users/login.dto');
+const { altaUserDTO } = require('../dto/users/alta.dto');
 //EXPORTO MODULOS DE SERVICIO
 // module.exports.corsOption = {
 //     origin : function (origin, callback) {
@@ -33,5 +35,22 @@ module.exports.usuarioValido = async (req,res,next)=>{
     }catch (err){
         console.log(err.message)
         res.status(500).json({error: err.message})
+    }
+}
+
+module.exports.checkDatosLogin = async(req, res, next) => {
+    try {
+        await Joi.attempt(req.body, loginDTO, "Los datos enviados no son correctos");
+        return next();
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
+module.exports.checkDatosAlta = async(req, res, next) => {
+    try {
+        await Joi.attempt(req.body, altaUserDTO, "Los datos enviados no son correctos");
+        return next();
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
 }
