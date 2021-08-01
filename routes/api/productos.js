@@ -1,6 +1,8 @@
 
 const router = require('express').Router();
-const { Producto }= require('../../db');router.get('/', async (req,res)=>{
+const { Producto }= require('../../db');
+
+router.get('/', async (req,res)=>{
     try {
         const producto= await Producto.findAll();// recupera todos los registros de la tabla, regresa una promesa
         res.json(producto) 
@@ -22,7 +24,9 @@ router.put('/:productoId', async (req,res)=>{
         res.json ({ success: 'Se ha modificado con éxito' })
     } catch (error) {
         res.status(400).render('404', {msj: error.message , titulo: 'Error al modificar los datos'})
-    }});router.delete('/:productoId', async (req,res)=>{
+    }});
+    
+router.delete('/:productoId', async (req,res)=>{
     try {
         await Producto.destroy({
             where:{id: req.params.productoId }

@@ -1,9 +1,10 @@
 export default class Product{
-    constructor(idProduct, nameProduct, priceProduct,cantProduct){
+    constructor(idProduct, nameProduct, priceProduct,cantProduct, stockProduct){
         this._idProduct = idProduct;
         this._nameProduct = nameProduct;
         this._priceProduct = priceProduct;
         this._cantProduct = cantProduct;
+        this._stockProduct = stockProduct;
     }
 
     get idProducto(){

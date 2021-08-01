@@ -28,10 +28,11 @@ items.addEventListener("click", (e) => {
 });
 
 class miContenido {
-  constructor(header, content, price, btn) {
+  constructor(header, content, price, stock, btn) {
     this.header = header;
     this.content = content;
     this.price = price;
+    this.stock = stock
     this.btn = btn;
   }
 }
@@ -54,9 +55,11 @@ async function renderData(link) {
         data.results[idx1].id +
         "/description"
     );
+    
     about = await about.json();
     let Objeto = new miContenido(
       document.createElement("h1"),
+      document.createElement("p"),
       document.createElement("p"),
       document.createElement("p"),
       document.createElement("a")
@@ -66,7 +69,7 @@ async function renderData(link) {
     Objeto.price.textContent = `${data.results[idx1].price}`;
 
     Objeto.content.textContent = `${about.plain_text}`;
-
+    Objeto.stock.textContent = '';
     Objeto.btn.textContent = "Más info...";
 
     Objeto.btn.setAttribute("href", data.results[idx1].permalink);
@@ -77,7 +80,14 @@ async function renderData(link) {
     cont.appendChild(Objeto.btn);
   }
 
-  for (let j = 0; j < 9; j++) {
+  //Nuestros productos
+
+  let res = await fetch("http://localhost:3000/api/productos");
+  let resultaData = await res.json();
+
+  console.log(resultaData)
+
+  for (let j = 0; j < resultaData.length; j++) {
     let columna = document.createElement("div");
     let card = document.createElement("div");
     let cardbody = document.createElement("div");
@@ -88,36 +98,33 @@ async function renderData(link) {
     cardbody.className += "card-body";
 
     //let idx2=Math.floor(Math.random() * Object.keys(data.results).length);
-    let imagen = document.createElement("img");
-    imagen.setAttribute("src", data.results[j].thumbnail);
+    //let imagen = document.createElement("img");
+    //imagen.setAttribute("src", data.results[j].thumbnail);
     let Objeto = new miContenido(
       document.createElement("h4"),
       document.createElement("p"),
       document.createElement("p"),
+      document.createElement("p"),
       document.createElement("button")
     );
-    let about = await fetch(
-      "https://api.mercadolibre.com/items/" +
-        data.results[j].id +
-        "/description"
-    );
-    about = await about.json();
 
-    Objeto.header.textContent = `${data.results[j].title}`;
-    Objeto.content.textContent = `${about.plain_text}`;
-    Objeto.price.textContent = `${data.results[j].price}`;
+    Objeto.header.textContent = `${resultaData[j].nombre}`;
+    Objeto.content.textContent = `${resultaData[j].descripcion}`;
+    Objeto.price.textContent = `${resultaData[j].precio}`;
+    Objeto.stock.textContent = `Stock: ${resultaData[j].stock}`
 
     Objeto.btn.textContent = "Agregar al carrito";
-    Objeto.btn.setAttribute("data-id", data.results[j].id);
+    Objeto.btn.setAttribute("data-id", resultaData[j].id);
     // Objeto.btn.setAttribute("href", data.results[j].permalink);
     Objeto.btn.className += "btn btn-lg btn-warning";
 
     cardbody.appendChild(Objeto.header);
     cardbody.appendChild(Objeto.content);
     cardbody.appendChild(Objeto.price);
+    cardbody.appendChild(Objeto.stock);
     cardbody.appendChild(Objeto.btn);
 
-    card.appendChild(imagen);
+    //card.appendChild(imagen);
     card.appendChild(cardbody);
 
     columna.appendChild(card);
@@ -153,13 +160,15 @@ const setCarrito = (item) => {
     item.querySelector("button").dataset.id,
     item.querySelector("h4").textContent,
     item.children[2].textContent,
-    1
+    1,
+    String(item.children[3].textContent).split(' ')[1]
   );
 
   console.log(producto);
   if (carrito.hasOwnProperty(producto.id)) {
     producto._cantProduct = carrito[producto._idProduct]._cantProduct + 1;
   }
+  console.log(producto._stockProduct)
 
   carrito[producto._idProduct] = { ...producto };
   pintarCarrito();
@@ -233,9 +242,13 @@ const btnAumentarDisminuir = (e) => {
   console.log(e.target.classList.contains("btn-info"));
   if (e.target.classList.contains("btn-info")) {
     const producto = carrito[e.target.dataset.id];
-    producto._cantProduct++;
-    carrito[e.target.dataset.id] = { ...producto };
-    pintarCarrito();
+    if(producto._cantProduct < producto._stockProduct){
+
+      producto._cantProduct++;
+      carrito[e.target.dataset.id] = { ...producto };
+      pintarCarrito();
+    }
+    
   }
 
   if (e.target.classList.contains("btn-danger")) {
