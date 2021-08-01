@@ -17,7 +17,7 @@ router.post('/', midd.checkDatosProducto, async (req,res)=>{
     } catch (error) {
         res.status(400).render('404', {msj: error.message , titulo: 'Error al agregar el producto'})
     }});
-router.put('/:productoId', midd.checkDatosEditarProducto, async (req,res)=>{
+router.put('/:productoId', async (req,res)=>{
     try {
         await Producto.update(req.body,{
             where:{id: req.params.productoId }

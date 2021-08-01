@@ -25,7 +25,7 @@ function payMethod() {
       })
       myProduct.stock = myProduct.stock - productsArray[i]._cantProduct;
       console.log(myProduct)
-      const res = await fetch(`http://localhost:3000/api/productos/${myProduct.id} `, {
+      const res = await fetch(`http://localhost:3000/api/productos/${myProduct.id}`, {
       method: "PUT", // include, *same-origin, omit
       headers: {
         "Content-Type": "application/json;charset=UTF-8"
