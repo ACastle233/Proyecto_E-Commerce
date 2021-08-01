@@ -7,7 +7,7 @@
 .btn-secondary,
 .btn-secondary:hover,
 .btn-secondary:focus {
-  color: #333;
+  color: #a9d126;
   text-shadow: none; /* Prevent inheritance from `body` */
 }
 
@@ -40,7 +40,7 @@ body {
 
 .nav-masthead .nav-link:hover,
 .nav-masthead .nav-link:focus {
-  border-bottom-color: rgba(255, 255, 255, .25);
+  border-bottom-color: rgba(181, 192, 20, 0.637);
 }
 
 .nav-masthead .nav-link + .nav-link {
