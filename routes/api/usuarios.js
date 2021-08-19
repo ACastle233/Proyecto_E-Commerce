@@ -29,7 +29,10 @@ router.post("/login", midd.checkDatosLogin,  async (req, res) => {
       const iguales = bcrypt.compareSync(req.body.password, user.password);
       if (iguales) {
         let validacion = await usuariosService.generaToken(req.body);
-        res.json(validacion);
+        res.json({
+          token : validacion,
+          usuario: user.username
+        });
       } else {
         res.json("Usuario o contraseña no coinciden");
       }

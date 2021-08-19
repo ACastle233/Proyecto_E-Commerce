@@ -264,6 +264,13 @@ const btnAumentarDisminuir = (e) => {
   e.stopPropagation();
 };
 
+function pintaNombre(){
+  let user = localStorage.getItem('usuario');
+  user.replace('"','')
+  const titulo = document.getElementById("textCategorie");
+  titulo.append(`${user}`)
+}
+
 //Traer todos los items de la API de ML
 renderData("https://api.mercadolibre.com/sites/MLM/search?category=MLM1743");
 
@@ -272,3 +279,5 @@ if (localStorage.getItem("carrito")) {
   carrito = JSON.parse(localStorage.getItem("carrito"));
   pintarCarrito();
 }
+
+pintaNombre();

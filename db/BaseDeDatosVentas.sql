@@ -1,4 +1,4 @@
-CREATE DATABASE APIML;
+CREATE DATABASE PresupuestosTecla;
 
 USE ventas;
 
